@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | default: "Booking Hub" }}</title>
+  
+  <style>
+    /* Global Reset & Design System */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    body { background-color: #0d1117; color: #f0f6fc; display: flex; flex-direction: column; min-height: 100vh; }
+    main { flex: 1; padding: 40px 20px; display: flex; justify-content: center; align-items: center; }
+
+    /* ================= HEADER STYLES ================= */
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 5%;
+      background: rgba(22, 27, 34, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .site-logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      text-decoration: none;
+      background: linear-gradient(135deg, #a855f7, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .join-card-btn {
+      padding: 10px 22px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+      transition: all 0.3s ease;
+    }
+    .join-card-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+    }
+
+    /* ================= DIGITAL CARD / PROFILE STYLES ================= */
+    .profile-wrapper { width: 100%; max-width: 420px; }
+    
+    .digital-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 25px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Dynamic Elite Accent Highlight */
+    .digital-card::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(234, 179, 8, 0.4) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+    .chip { width: 45px; height: 32px; background: linear-gradient(135deg, #d97706, #f59e0b); border-radius: 6px; }
+    
+    .badge-tier {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(234, 179, 8, 0.15);
+      color: #facc15;
+      border: 1px solid rgba(234, 179, 8, 0.3);
+    }
+
+    .user-info { margin-bottom: 25px; }
+    .user-name { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .user-id { font-size: 13px; color: #8b949e; letter-spacing: 0.5px; }
+
+    .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 15px;
+    }
+    .access-label { font-size: 11px; color: #8b949e; text-transform: uppercase; margin-bottom: 4px; }
+    .access-tags { font-size: 13px; font-weight: 600; color: #38bdf8; }
+
+    /* ================= FOOTER STYLES ================= */
+    .main-footer {
+      text-align: center;
+      padding: 20px;
+      background: #161b22;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 13px;
+      color: #8b949e;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. HEADER SECTION -->
+  <header class="main-header">
+    <a href="index.html" class="site-logo">LOGO</a>
+    <a href="profile.html" id="userCardBtn" class="join-card-btn">Join / My Card</a>
+  </header>
+
+  <!-- 2. MAIN PROFILE / CARD SECTION -->
+  <main>
+    <div class="profile-wrapper">
+      <div id="membershipCard" class="digital-card">
+        
+        <div class="card-top">
+          <div class="chip"></div>
+          <span id="tierBadge" class="badge-tier">Elite Access</span>
+        </div>
+
+        <div class="user-info">
+          <h2 id="userName" class="user-name">Alex Morgan</h2>
+          <p id="userID" class="user-id">ID: #8920-ELITE</p>
+        </div>
+
+        <div class="card-bottom">
+          <div>
+            <div class="access-label">Tier Access Rights</div>
+            <div id="accessRights" class="access-tags">Normal + Plus + Elite</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- 3. FOOTER SECTION -->
+  <footer class="main-footer">
+    <p>&copy; 2026 Booking Hub. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
