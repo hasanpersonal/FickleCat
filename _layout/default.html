@@ -6,152 +6,88 @@
   <title>{{ page.title | default: "Booking Hub" }}</title>
   
   <style>
-    /* Global Reset & Design System */
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-    body { background-color: #0d1117; color: #f0f6fc; display: flex; flex-direction: column; min-height: 100vh; }
-    main { flex: 1; padding: 40px 20px; display: flex; justify-content: center; align-items: center; }
+    /* Global Pink Theme Variables & Resets */
+    :root {
+      --primary-pink: #ec4899;
+      --deep-pink: #db2777;
+      --neon-pink: #f43f5e;
+      --pink-glow: rgba(236, 72, 153, 0.4);
+      --bg-dark: #0f0b15;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(244, 63, 94, 0.2);
+    }
 
-    /* ================= HEADER STYLES ================= */
-    .main-header {
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+    
+    body {
+      background: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(236, 72, 153, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+      color: #fce7f3;
+      min-height: 100vh;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 5%;
-      background: rgba(22, 27, 34, 0.8);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      flex-direction: column;
+    }
+
+    /* Header Styles */
+    .main-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 8%; background: rgba(15, 11, 21, 0.7);
+      backdrop-filter: blur(15px); border-bottom: 1px solid var(--glass-border);
+      position: sticky; top: 0; z-index: 100;
     }
     .site-logo {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      color: #ffffff;
-      text-decoration: none;
-      background: linear-gradient(135deg, #a855f7, #3b82f6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 24px; font-weight: 900; letter-spacing: 2px; text-decoration: none;
+      background: linear-gradient(135deg, #f43f5e, #ec4899, #d946ef);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
     }
     .join-card-btn {
-      padding: 10px 22px;
-      border-radius: 30px;
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-      transition: all 0.3s ease;
+      padding: 10px 24px; border-radius: 30px;
+      background: linear-gradient(135deg, var(--primary-pink), var(--deep-pink));
+      color: #ffffff; text-decoration: none; font-weight: 700; font-size: 14px;
+      box-shadow: 0 0 15px var(--pink-glow); transition: all 0.3s ease;
     }
-    .join-card-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
-    }
+    .join-card-btn:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(236, 72, 153, 0.7); }
 
-    /* ================= DIGITAL CARD / PROFILE STYLES ================= */
-    .profile-wrapper { width: 100%; max-width: 420px; }
-    
-    .digital-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 25px;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-      position: relative;
-      overflow: hidden;
-    }
-    /* Dynamic Elite Accent Highlight */
-    .digital-card::before {
-      content: '';
-      position: absolute;
-      top: -50px;
-      right: -50px;
-      width: 150px;
-      height: 150px;
-      background: radial-gradient(circle, rgba(234, 179, 8, 0.4) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-    .chip { width: 45px; height: 32px; background: linear-gradient(135deg, #d97706, #f59e0b); border-radius: 6px; }
-    
-    .badge-tier {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 5px 12px;
-      border-radius: 20px;
-      background: rgba(234, 179, 8, 0.15);
-      color: #facc15;
-      border: 1px solid rgba(234, 179, 8, 0.3);
-    }
-
-    .user-info { margin-bottom: 25px; }
-    .user-name { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .user-id { font-size: 13px; color: #8b949e; letter-spacing: 0.5px; }
-
-    .card-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 15px;
-    }
-    .access-label { font-size: 11px; color: #8b949e; text-transform: uppercase; margin-bottom: 4px; }
-    .access-tags { font-size: 13px; font-weight: 600; color: #38bdf8; }
-
-    /* ================= FOOTER STYLES ================= */
+    /* Footer Styles */
     .main-footer {
-      text-align: center;
-      padding: 20px;
-      background: #161b22;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 13px;
-      color: #8b949e;
+      margin-top: auto; text-align: center; padding: 25px;
+      background: rgba(15, 11, 21, 0.9); border-top: 1px solid var(--glass-border);
+      font-size: 13px; color: #f472b6;
+    }
+
+    /* Main Content Wrapper */
+    .content-wrapper { width: 90%; max-width: 1200px; margin: 0 auto; padding: 40px 0; flex: 1; }
+
+    /* Mobile Responsive Fixes */
+    @media screen and (max-width: 768px) {
+      .main-header { padding: 15px 5%; flex-direction: column; gap: 15px; }
     }
   </style>
+  
+  <!-- Add any extra CSS from the specific page -->
+  {% if page.extra_css %}
+    <style>{{ page.extra_css }}</style>
+  {% endif %}
 </head>
 <body>
 
-  <!-- 1. HEADER SECTION -->
+  <!-- Header Include -->
   <header class="main-header">
     <a href="index.html" class="site-logo">LOGO</a>
     <a href="profile.html" id="userCardBtn" class="join-card-btn">Join / My Card</a>
   </header>
 
-  <!-- 2. MAIN PROFILE / CARD SECTION -->
-  <main>
-    <div class="profile-wrapper">
-      <div id="membershipCard" class="digital-card">
-        
-        <div class="card-top">
-          <div class="chip"></div>
-          <span id="tierBadge" class="badge-tier">Elite Access</span>
-        </div>
-
-        <div class="user-info">
-          <h2 id="userName" class="user-name">Alex Morgan</h2>
-          <p id="userID" class="user-id">ID: #8920-ELITE</p>
-        </div>
-
-        <div class="card-bottom">
-          <div>
-            <div class="access-label">Tier Access Rights</div>
-            <div id="accessRights" class="access-tags">Normal + Plus + Elite</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
+  <!-- Page Content Gets Injected Here -->
+  <main class="content-wrapper">
+    {{ content }}
   </main>
 
-  <!-- 3. FOOTER SECTION -->
+  <!-- Footer Include -->
   <footer class="main-footer">
-    <p>&copy; 2026 Booking Hub. All rights reserved.</p>
+    <p>&copy; 2026 Booking Hub. Designed with Pink Neon Aesthetic.</p>
   </footer>
 
 </body>
